@@ -1,0 +1,71 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - generic [ref=f8e4]:
+      - button "Toggle menu" [ref=f8e6]
+      - link "Tailspin Toys" [ref=f8e10] [cursor=pointer]:
+        - /url: /
+  - main [ref=f8e11]:
+    - generic [ref=f8e13]:
+      - generic [ref=f8e14]:
+        - heading "Welcome to Tailspin Toys" [level=1] [ref=f8e15]
+        - paragraph [ref=f8e16]: Find your next game! And maybe even back one! Explore our collection!
+      - generic [ref=f8e17]:
+        - heading "Featured Games" [level=2] [ref=f8e18]
+        - generic [ref=f8e20]:
+          - group "Categories" [ref=f8e21]:
+            - generic [ref=f8e23]:
+              - generic [ref=f8e24] [cursor=pointer]:
+                - checkbox "Filter by Action" [checked] [ref=f8e25]
+                - generic [ref=f8e26]: Action
+              - generic [ref=f8e27] [cursor=pointer]:
+                - checkbox "Filter by Adventure" [ref=f8e28]
+                - generic [ref=f8e29]: Adventure
+              - generic [ref=f8e30] [cursor=pointer]:
+                - checkbox "Filter by Puzzle" [ref=f8e31]
+                - generic [ref=f8e32]: Puzzle
+              - generic [ref=f8e33] [cursor=pointer]:
+                - checkbox "Filter by Simulation" [ref=f8e34]
+                - generic [ref=f8e35]: Simulation
+              - generic [ref=f8e36] [cursor=pointer]:
+                - checkbox "Filter by Strategy" [ref=f8e37]
+                - generic [ref=f8e38]: Strategy
+          - group "Publishers" [ref=f8e39]:
+            - generic [ref=f8e41]:
+              - generic [ref=f8e42] [cursor=pointer]:
+                - checkbox "Filter by CodeForge Studios" [checked] [ref=f8e43]
+                - generic [ref=f8e44]: CodeForge Studios
+              - generic [ref=f8e45] [cursor=pointer]:
+                - checkbox "Filter by DevMasters Inc." [ref=f8e46]
+                - generic [ref=f8e47]: DevMasters Inc.
+              - generic [ref=f8e48] [cursor=pointer]:
+                - checkbox "Filter by GitHub Games" [ref=f8e49]
+                - generic [ref=f8e50]: GitHub Games
+              - generic [ref=f8e51] [cursor=pointer]:
+                - checkbox "Filter by Ops Interactive" [ref=f8e52]
+                - generic [ref=f8e53]: Ops Interactive
+        - generic [ref=f8e54]:
+          - article [ref=f8e55]:
+            - generic [ref=f8e56]:
+              - heading "Cloud Conqueror" [level=3] [ref=f8e57]
+              - generic [ref=f8e58]: ★ 3.9
+              - paragraph [ref=f8e59]: Cloud Conqueror thrusts you into a high-stakes aerial battle against rogue cloud services. With Mona as your co-pilot, navigate through stormy skies and outmaneuver digital adversaries in a quest to reclaim control over your virtual domain. Support this game through our crowdfunding platform!
+              - generic [ref=f8e60]:
+                - generic [ref=f8e61]: Action
+                - generic [ref=f8e62]: CodeForge Studios
+              - link "View Details" [ref=f8e63] [cursor=pointer]:
+                - /url: /game/21
+          - article [ref=f8e64]:
+            - generic [ref=f8e65]:
+              - heading "Script Strike" [level=3] [ref=f8e66]
+              - generic [ref=f8e67]: ★ 5.0
+              - paragraph [ref=f8e68]: Script Strike propels you into a fast-paced coding battleground where every keystroke could change the tide of an intense conflict. Mona rallies your forces as you dive into real-time challenges that merge reflexes with smart script execution. Support this game through our crowdfunding platform!
+              - generic [ref=f8e69]:
+                - generic [ref=f8e70]: Action
+                - generic [ref=f8e71]: CodeForge Studios
+              - link "View Details" [ref=f8e72] [cursor=pointer]:
+                - /url: /game/17
+  - generic [ref=f8e75]:
+    - button [ref=f8e76]
+    - button [ref=f8e82]
+    - button [ref=f8e86]
+    - button [ref=f8e91]
