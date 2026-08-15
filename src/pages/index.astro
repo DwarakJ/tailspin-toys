@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import GameCard from '../components/GameCard.astro';
 import PageHero from '../components/PageHero.astro';
 import EmptyState from '../components/EmptyState.astro';
+import FilterControls from '../components/FilterControls.astro';
 import { getDatabase } from '../lib/db';
 import { getAllGames } from '../lib/games';
 
@@ -21,13 +22,167 @@ const games = await getAllGames(getDatabase());
     <div>
       <h2 class="text-2xl font-medium mb-6 text-slate-100">Featured Games</h2>
 
+      <FilterControls />
+
       {games.length === 0 ? (
         <EmptyState text="No games available at the moment." />
       ) : (
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="games-grid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="games-grid" id="games-grid">
           {games.map((game) => <GameCard game={game} />)}
         </div>
       )}
+
+      {games.length > 0 && (
+        <div id="empty-state-container" class="hidden">
+          <EmptyState text="No games match your filters. Try adjusting your selections." />
+        </div>
+      )}
     </div>
+
+    <!-- Store all games data for client-side filtering -->
+    <script type="application/json" id="games-data" set:html={JSON.stringify(games)}></script>
   </div>
+
+  <script>
+    // Parse URL query parameters to extract filter selections
+    function getQueryParams(): { categories: number[]; publishers: number[] } {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        categories: params.getAll('category').map(Number),
+        publishers: params.getAll('publisher').map(Number),
+      };
+    }
+
+    // Rebuild URL with current filter selections
+    function updateURL(categoryIds: number[], publisherIds: number[]): void {
+      const params = new URLSearchParams();
+      categoryIds.forEach((id) => params.append('category', String(id)));
+      publisherIds.forEach((id) => params.append('publisher', String(id)));
+
+      const search = params.toString();
+      const newURL = search ? `?${search}` : window.location.pathname;
+      window.history.replaceState({}, '', newURL);
+    }
+
+    // Filter games based on selected category and publisher IDs
+    function filterGames(
+      games: ReturnType<typeof JSON.parse>,
+      categoryIds: number[],
+      publisherIds: number[]
+    ): ReturnType<typeof JSON.parse> {
+      return games.filter((game: Record<string, unknown>) => {
+        const matchesCategory =
+          categoryIds.length === 0 ||
+          (game.category && categoryIds.includes((game.category as Record<string, number>).id));
+        const matchesPublisher =
+          publisherIds.length === 0 ||
+          (game.publisher && publisherIds.includes((game.publisher as Record<string, number>).id));
+
+        return matchesCategory && matchesPublisher;
+      });
+    }
+
+    // Render games grid with filtered results
+    function renderGames(filteredGames: ReturnType<typeof JSON.parse>): void {
+      const grid = document.getElementById('games-grid');
+      const emptyStateContainer = document.getElementById('empty-state-container');
+
+      if (!grid || !emptyStateContainer) return;
+
+      if (filteredGames.length === 0) {
+        grid.classList.add('hidden');
+        emptyStateContainer.classList.remove('hidden');
+      } else {
+        grid.classList.remove('hidden');
+        emptyStateContainer.classList.add('hidden');
+
+        // Update grid content
+        grid.innerHTML = filteredGames
+          .map((game: Record<string, unknown>) => {
+            const starRating = (game.starRating as number | null)
+              ? `<div class="text-yellow-400">★ ${((game.starRating as number) || 0).toFixed(1)}</div>`
+              : '';
+            const categoryTag = game.category
+              ? `<span class="inline-block bg-blue-600/20 text-blue-300 px-3 py-1 rounded-lg text-sm">${(game.category as Record<string, string>).name}</span>`
+              : '';
+            const publisherTag = game.publisher
+              ? `<span class="inline-block bg-purple-600/20 text-purple-300 px-3 py-1 rounded-lg text-sm">${(game.publisher as Record<string, string>).name}</span>`
+              : '';
+
+            return `
+              <article class="bg-slate-800/70 backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden hover:border-slate-500 transition-colors" data-testid="game-card-${game.id}">
+                <div class="p-6 space-y-4">
+                  <h3 class="text-lg font-semibold text-slate-100 line-clamp-2">${game.title}</h3>
+                  ${starRating}
+                  <p class="text-slate-300 text-sm line-clamp-3">${game.description}</p>
+                  <div class="space-y-2">
+                    ${categoryTag}
+                    ${publisherTag}
+                  </div>
+                  <a href="/game/${game.id}" class="inline-block mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                    View Details
+                  </a>
+                </div>
+              </article>
+            `;
+          })
+          .join('');
+      }
+    }
+
+    // Initialize filtering on page load
+    function initializeFiltering(): void {
+      const gamesDataElement = document.getElementById('games-data');
+      if (!gamesDataElement) return;
+
+      const games = JSON.parse(gamesDataElement.textContent || '[]');
+      const { categories, publishers } = getQueryParams();
+
+      // Set up checkboxes to reflect current query params
+      document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        const element = checkbox as HTMLInputElement;
+        const isCategory = element.name === 'category';
+        const isPublisher = element.name === 'publisher';
+        const id = Number(element.value);
+
+        if (isCategory) {
+          element.checked = categories.includes(id);
+        } else if (isPublisher) {
+          element.checked = publishers.includes(id);
+        }
+      });
+
+      // Filter and render games based on query params
+      const filteredGames = filterGames(games, categories, publishers);
+      renderGames(filteredGames);
+    }
+
+    // Handle checkbox changes
+    document.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.type === 'checkbox' && (target.name === 'category' || target.name === 'publisher')) {
+        const gamesDataElement = document.getElementById('games-data');
+        if (!gamesDataElement) return;
+
+        const games = JSON.parse(gamesDataElement.textContent || '[]');
+
+        // Collect all checked categories and publishers
+        const categories = Array.from(
+          document.querySelectorAll('input[type="checkbox"][name="category"]:checked')
+        ).map((el) => Number((el as HTMLInputElement).value));
+
+        const publishers = Array.from(
+          document.querySelectorAll('input[type="checkbox"][name="publisher"]:checked')
+        ).map((el) => Number((el as HTMLInputElement).value));
+
+        // Update URL and re-render
+        updateURL(categories, publishers);
+        const filteredGames = filterGames(games, categories, publishers);
+        renderGames(filteredGames);
+      }
+    });
+
+    // Initialize on page load
+    initializeFiltering();
+  </script>
 </Layout>

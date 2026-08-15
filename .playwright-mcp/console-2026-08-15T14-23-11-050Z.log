@@ -1,0 +1,7 @@
+[     209ms] SyntaxError: Expected property name or '}' in JSON at position 8 (line 2 column 8)
+    at JSON.parse (<anonymous>)
+    at initializeFiltering (http://localhost:4321/src/pages/index.astro?astro&type=script&index=0&lang.ts:65:21)
+    at http://localhost:4321/src/pages/index.astro?astro&type=script&index=0&lang.ts:100:1
+[   18677ms] SyntaxError: Expected property name or '}' in JSON at position 8 (line 2 column 8)
+    at JSON.parse (<anonymous>)
+    at HTMLDocument.<anonymous> (http://localhost:4321/src/pages/index.astro?astro&type=script&index=0&lang.ts:89:22)
