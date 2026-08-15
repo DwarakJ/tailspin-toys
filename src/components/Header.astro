@@ -77,13 +77,13 @@ import Menu from '../assets/icons/menu.svg';
       const raw = localStorage.getItem(HC_KEY);
       if (raw === null) return null;
       return raw === 'true';
-    } catch (_e) {
+    } catch {
       return null;
     }
   }
 
   function savePreference(val) {
-    try { localStorage.setItem(HC_KEY, val ? 'true' : 'false'); } catch (_e) { /* ignore storage errors */ }
+    try { localStorage.setItem(HC_KEY, val ? 'true' : 'false'); } catch { /* ignore storage errors */ }
   }
 
   // Initialize
