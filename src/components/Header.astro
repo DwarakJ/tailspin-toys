@@ -18,6 +18,11 @@ import Menu from '../assets/icons/menu.svg';
       </div>
       <div class="text-xl font-bold"><a href="/" class="hover:underline">Tailspin Toys</a></div>
     </div>
+
+    <!-- High contrast toggle -->
+    <div class="flex items-center gap-2">
+      <button id="high-contrast-toggle" data-testid="high-contrast-toggle" aria-pressed="false" class="px-3 py-1 rounded-md bg-slate-800 text-slate-100 hover:bg-slate-700 focus:ring-2 focus:ring-yellow-400 focus:outline-none">High contrast</button>
+    </div>
   </div>
 </header>
 
@@ -55,5 +60,45 @@ import Menu from '../assets/icons/menu.svg';
         menuToggle.focus();
       }
     });
+  }
+
+  // High-contrast toggle: persist in localStorage and apply class to <html>
+  const hcToggle = document.getElementById('high-contrast-toggle');
+  const HC_KEY = 'highContrast';
+
+  function applyHighContrast(enabled) {
+    const html = document.documentElement;
+    html.classList.toggle('high-contrast', enabled);
+    if (hcToggle) hcToggle.setAttribute('aria-pressed', String(Boolean(enabled)));
+  }
+
+  function loadPreference() {
+    try {
+      const raw = localStorage.getItem(HC_KEY);
+      if (raw === null) return null;
+      return raw === 'true';
+    } catch {
+      return null;
+    }
+  }
+
+  function savePreference(val) {
+    try { localStorage.setItem(HC_KEY, val ? 'true' : 'false'); } catch { /* ignore storage errors */ }
+  }
+
+  // Initialize
+  const pref = loadPreference();
+  if (pref !== null) applyHighContrast(pref);
+
+  if (hcToggle) {
+    hcToggle.addEventListener('click', () => {
+      const currently = document.documentElement.classList.contains('high-contrast');
+      const next = !currently;
+      applyHighContrast(next);
+      savePreference(next);
+      hcToggle.focus();
+    });
+
+    // Native button handles keyboard activation
   }
 </script>

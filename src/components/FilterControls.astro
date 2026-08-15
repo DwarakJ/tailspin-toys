@@ -1,0 +1,75 @@
+---
+/**
+ * FilterControls component for filtering games by category and publisher.
+ * Provides accessible checkbox-based filter controls with dark theme styling.
+ */
+
+import { getAllCategories } from '../lib/categories';
+import { getAllPublishers } from '../lib/publishers';
+import { getDatabase } from '../lib/db';
+
+interface Props {
+    selectedCategories?: number[];
+    selectedPublishers?: number[];
+}
+
+const { selectedCategories = [], selectedPublishers = [] } = Astro.props;
+
+const db = getDatabase();
+const categories = await getAllCategories(db);
+const publishers = await getAllPublishers(db);
+---
+
+<div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Categories Filter -->
+        <fieldset>
+            <legend class="text-lg font-semibold text-slate-100 mb-4">Categories</legend>
+            <div class="space-y-2">
+                {
+                    categories.map((category) => (
+                        <label class="flex items-center space-x-3 cursor-pointer group">
+                            <input
+                                type="checkbox"
+                                name="category"
+                                value={category.id}
+                                checked={selectedCategories.includes(category.id)}
+                                data-testid={`category-checkbox-${category.id}`}
+                                aria-label={`Filter by ${category.name}`}
+                                class="w-4 h-4 rounded border-slate-600 bg-slate-700 text-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer transition-colors"
+                            />
+                            <span class="text-slate-300 group-hover:text-slate-100 transition-colors">
+                                {category.name}
+                            </span>
+                        </label>
+                    ))
+                }
+            </div>
+        </fieldset>
+
+        <!-- Publishers Filter -->
+        <fieldset>
+            <legend class="text-lg font-semibold text-slate-100 mb-4">Publishers</legend>
+            <div class="space-y-2">
+                {
+                    publishers.map((publisher) => (
+                        <label class="flex items-center space-x-3 cursor-pointer group">
+                            <input
+                                type="checkbox"
+                                name="publisher"
+                                value={publisher.id}
+                                checked={selectedPublishers.includes(publisher.id)}
+                                data-testid={`publisher-checkbox-${publisher.id}`}
+                                aria-label={`Filter by ${publisher.name}`}
+                                class="w-4 h-4 rounded border-slate-600 bg-slate-700 text-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 cursor-pointer transition-colors"
+                            />
+                            <span class="text-slate-300 group-hover:text-slate-100 transition-colors">
+                                {publisher.name}
+                            </span>
+                        </label>
+                    ))
+                }
+            </div>
+        </fieldset>
+    </div>
+</div>

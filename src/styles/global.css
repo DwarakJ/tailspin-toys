@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+/* High-contrast mode styles */
+html.high-contrast, html.high-contrast body {
+  background-color: #000 !important;
+  color: #FFFFFF !important;
+}
+
+html.high-contrast a {
+  color: #FFFF00 !important; /* bright yellow for links */
+  text-decoration: underline !important;
+}
+
+html.high-contrast header {
+  background-color: #000 !important;
+  color: #FFFFFF !important;
+}
+
+html.high-contrast .bg-blue-500 { background-color: #000 !important; }
+html.high-contrast .text-slate-100 { color: #FFFFFF !important; }
+
+/* Ensure visible focus for all elements in high-contrast */
+html.high-contrast :focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px #FFFF00 !important; /* strong yellow focus */
+}
+
+/* Reduce motion preference respected via Tailwind 'motion-reduce' in markup */

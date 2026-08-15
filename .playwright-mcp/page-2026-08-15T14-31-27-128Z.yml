@@ -1,0 +1,91 @@
+- generic [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - generic [ref=f4e4]:
+      - button "Toggle menu" [ref=f4e6]
+      - link "Tailspin Toys" [ref=f4e10] [cursor=pointer]:
+        - /url: /
+  - main [ref=f4e11]:
+    - generic [ref=f4e13]:
+      - generic [ref=f4e14]:
+        - heading "Welcome to Tailspin Toys" [level=1] [ref=f4e15]
+        - paragraph [ref=f4e16]: Find your next game! And maybe even back one! Explore our collection!
+      - generic [ref=f4e17]:
+        - heading "Featured Games" [level=2] [ref=f4e18]
+        - generic [ref=f4e20]:
+          - group "Categories" [ref=f4e21]:
+            - generic [ref=f4e23]:
+              - generic [ref=f4e24] [cursor=pointer]:
+                - checkbox "Filter by Action" [ref=f4e25]
+                - generic [ref=f4e26]: Action
+              - generic [ref=f4e27] [cursor=pointer]:
+                - checkbox "Filter by Adventure" [ref=f4e28]
+                - generic [ref=f4e29]: Adventure
+              - generic [ref=f4e30] [cursor=pointer]:
+                - checkbox "Filter by Puzzle" [ref=f4e31]
+                - generic [ref=f4e32]: Puzzle
+              - generic [ref=f4e33] [cursor=pointer]:
+                - checkbox "Filter by Simulation" [ref=f4e34]
+                - generic [ref=f4e35]: Simulation
+              - generic [ref=f4e36] [cursor=pointer]:
+                - checkbox "Filter by Strategy" [checked] [active] [ref=f4e37]
+                - generic [ref=f4e38]: Strategy
+          - group "Publishers" [ref=f4e39]:
+            - generic [ref=f4e41]:
+              - generic [ref=f4e42] [cursor=pointer]:
+                - checkbox "Filter by CodeForge Studios" [ref=f4e43]
+                - generic [ref=f4e44]: CodeForge Studios
+              - generic [ref=f4e45] [cursor=pointer]:
+                - checkbox "Filter by DevMasters Inc." [ref=f4e46]
+                - generic [ref=f4e47]: DevMasters Inc.
+              - generic [ref=f4e48] [cursor=pointer]:
+                - checkbox "Filter by GitHub Games" [ref=f4e49]
+                - generic [ref=f4e50]: GitHub Games
+              - generic [ref=f4e51] [cursor=pointer]:
+                - checkbox "Filter by Ops Interactive" [ref=f4e52]
+                - generic [ref=f4e53]: Ops Interactive
+        - generic [ref=f4e54]:
+          - article [ref=f4e267]:
+            - generic [ref=f4e268]:
+              - heading "DevOps Dominion" [level=3] [ref=f4e269]
+              - generic [ref=f4e270]: ★ 3.6
+              - paragraph [ref=f4e271]: In DevOps Dominion, strategic planning meets advanced deployment tactics in a fast-paced battlefield of code. Mona leads your team of digital warriors through orchestrated pipelines and microservice skirmishes, ensuring every command brings a competitive edge. Support this game through our crowdfunding platform!
+              - generic [ref=f4e272]:
+                - generic [ref=f4e273]: Strategy
+                - generic [ref=f4e274]: CodeForge Studios
+              - link "View Details" [ref=f4e275] [cursor=pointer]:
+                - /url: /game/1
+          - article [ref=f4e276]:
+            - generic [ref=f4e277]:
+              - heading "Pipeline Conquest" [level=3] [ref=f4e278]
+              - generic [ref=f4e279]: ★ 3.9
+              - paragraph [ref=f4e280]: Pipeline Conquest challenges players to optimize continuous integration workflows while countering unforeseen system failures. With Mona by your side, organize automated builds and deployment pipelines in real time to secure lasting digital victory. Support this game through our crowdfunding platform!
+              - generic [ref=f4e281]:
+                - generic [ref=f4e282]: Strategy
+                - generic [ref=f4e283]: DevMasters Inc.
+              - link "View Details" [ref=f4e284] [cursor=pointer]:
+                - /url: /game/2
+          - article [ref=f4e285]:
+            - generic [ref=f4e286]:
+              - heading "Repo Rulers" [level=3] [ref=f4e287]
+              - generic [ref=f4e288]: ★ 4.1
+              - paragraph [ref=f4e289]: Repo Rulers demands razor-sharp tactics and agile repository management to dominate interconnected servers. Under Mona’s guidance, you'll enforce branch protections and manage pull requests in a high-stakes arena where precision is paramount. Support this game through our crowdfunding platform!
+              - generic [ref=f4e290]:
+                - generic [ref=f4e291]: Strategy
+                - generic [ref=f4e292]: Ops Interactive
+              - link "View Details" [ref=f4e293] [cursor=pointer]:
+                - /url: /game/4
+          - article [ref=f4e294]:
+            - generic [ref=f4e295]:
+              - heading "Server Siege" [level=3] [ref=f4e296]
+              - generic [ref=f4e297]: ★ 3.3
+              - paragraph [ref=f4e298]: Server Siege throws you into the midst of a digital fortress under siege by relentless cyber threats. As Mona rallies your defense, you'll coordinate load-balancers and version controls to fortify your network stronghold. Support this game through our crowdfunding platform!
+              - generic [ref=f4e299]:
+                - generic [ref=f4e300]: Strategy
+                - generic [ref=f4e301]: GitHub Games
+              - link "View Details" [ref=f4e302] [cursor=pointer]:
+                - /url: /game/3
+  - generic [ref=f4e246]:
+    - button [ref=f4e247]
+    - button [ref=f4e253]
+    - button [ref=f4e257]
+    - button [ref=f4e262]
