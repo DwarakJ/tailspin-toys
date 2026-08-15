@@ -103,12 +103,6 @@ const games = await getAllGames(getDatabase());
             const starRating = (game.starRating as number | null)
               ? `<div class="text-yellow-400">★ ${((game.starRating as number) || 0).toFixed(1)}</div>`
               : '';
-            const categoryTag = game.category
-              ? `<span class="inline-block bg-blue-600/20 text-blue-300 px-3 py-1 rounded-lg text-sm">${(game.category as Record<string, string>).name}</span>`
-              : '';
-            const publisherTag = game.publisher
-              ? `<span class="inline-block bg-purple-600/20 text-purple-300 px-3 py-1 rounded-lg text-sm">${(game.publisher as Record<string, string>).name}</span>`
-              : '';
 
             return `
               <a href="/game/${id}" class="group block bg-slate-800/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-slate-700/50 hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-xl transition-all duration-300 hover:translate-y-[-6px]" data-testid="game-card" data-game-id="${id}">
