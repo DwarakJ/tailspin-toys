@@ -19,6 +19,27 @@ const games = await getAllGames(getDatabase());
     />
 
     <div>
+      <!-- Filter controls (progressive enhancement) -->
+      <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-wrap gap-3 items-center">
+          <label for="filter-category" class="sr-only">Filter by category</label>
+          <select id="filter-category" data-testid="filter-category" class="bg-slate-700 text-slate-100 rounded px-3 py-2" aria-label="Filter by category">
+            <option value="">All categories</option>
+            {Array.from(new Set(games.map((g) => g.category?.name).filter(Boolean))).map((c) => (
+              <option value={c}>{c}</option>
+            ))}
+          </select>
+
+          <label for="filter-publisher" class="sr-only">Filter by publisher</label>
+          <select id="filter-publisher" data-testid="filter-publisher" class="bg-slate-700 text-slate-100 rounded px-3 py-2" aria-label="Filter by publisher">
+            <option value="">All publishers</option>
+            {Array.from(new Set(games.map((g) => g.publisher?.name).filter(Boolean))).map((p) => (
+              <option value={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <h2 class="text-2xl font-medium mb-6 text-slate-100">Featured Games</h2>
 
       {games.length === 0 ? (
@@ -28,6 +49,36 @@ const games = await getAllGames(getDatabase());
           {games.map((game) => <GameCard game={game} />)}
         </div>
       )}
+
+      <script type="module">
+        // Client-side filtering: progressive enhancement only
+        document.addEventListener('DOMContentLoaded', () => {
+          const catSelect = document.getElementById('filter-category');
+          const pubSelect = document.getElementById('filter-publisher');
+          const grid = document.querySelector('[data-testid="games-grid"]');
+          if (!grid || !catSelect || !pubSelect) return;
+
+          const cards = Array.from(grid.querySelectorAll('[data-testid="game-card"]'));
+
+          function applyFilter() {
+            const cat = catSelect.value;
+            const pub = pubSelect.value;
+
+            cards.forEach((card) => {
+              const cardCat = (card.getAttribute('data-category') || '').trim();
+              const cardPub = (card.getAttribute('data-publisher') || '').trim();
+
+              const matchCategory = !cat || cardCat === cat;
+              const matchPublisher = !pub || cardPub === pub;
+
+              card.style.display = matchCategory && matchPublisher ? '' : 'none';
+            });
+          }
+
+          catSelect.addEventListener('change', applyFilter);
+          pubSelect.addEventListener('change', applyFilter);
+        });
+      </script>
     </div>
   </div>
 </Layout>
