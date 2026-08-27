@@ -20,6 +20,8 @@ The workflow only runs on repositories created from the template (the `if: ${{ !
 
 ## Getting started
 
+See CONTRIBUTING.md for contribution guidelines.
+
 Install dependencies once with Node.js 22.13 or later:
 
 ```bash
