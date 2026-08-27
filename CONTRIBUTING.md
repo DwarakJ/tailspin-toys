@@ -1,7 +1,7 @@
 # Contributing to Tailspin Toys
 
-[fork]: https://github.com/github-samples/tailspin-toys/fork
-[pr]: https://github.com/github-samples/tailspin-toys/compare
+[fork]: https://github.com/DwarakJ/tailspin-toys/fork
+[pr]: https://github.com/DwarakJ/tailspin-toys/compare
 [code-of-conduct]: CODE_OF_CONDUCT.md
 
 Thank you for your interest in contributing to Tailspin Toys! Your help is essential for making this crowdfunding platform the best it can be for game creators and backers alike.
@@ -81,7 +81,7 @@ All change requests should start with an issue. You're welcome to file the issue
 
 2. Make your changes, following the documented coding standards.
 
-3. Run the test suites to ensure nothing is broken:
+3. Run the test suites to ensure nothing is broken. Prefer invoking the project's `quality-checks` skill to run tests and lint with project-specific setup; you can still run these commands locally:
    ```bash
    npm run lint
    npm run test:unit
